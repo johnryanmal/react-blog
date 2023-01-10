@@ -1,34 +1,96 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
 
+function Header() {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <header>
+      <a href="#">Home</a> | <a href="#posts-index">All posts</a> | <a href="#posts-new">New post</a>
+    </header>
+  )
+}
+
+function Footer() {
+  return (
+    <footer>
+      <p>Copyright 20XX</p>
+    </footer>
+  )
+}
+
+function PostsNew() {
+  return (
+    <div id="posts-new">
+      <h1>New post</h1>
+      <form method="GET">
+        <div>Title: <input type="text" id="title"></input></div>
+        <div>Body: <input type="text" id="body"></input></div>
+        <div>Image: <input type="text" id="image"></input></div>
+        <input type="submit"></input>
+      </form>
     </div>
   )
 }
 
-export default App
+function PostsIndex(props) {
+  return (
+    <div id="posts-index">
+      <h1>All posts</h1>
+
+      {props.posts.map(recipe => (
+        <div key={recipe.id}>
+          <h2>{recipe.title}</h2>
+          <img src="" alt={recipe.image}></img>
+          <p>{recipe.body}</p>
+        </div>
+      ))}
+        
+    </div>
+  )
+}
+
+function Content() {
+  const [posts, setPosts] = useState([
+    {
+      id: 1,
+      title: "Title 1",
+      body: "Body 1",
+      image: "Image 1",
+    },
+    {
+      id: 2,
+      title: "Title 2",
+      body: "Body 2",
+      image: "Image 2",
+    },
+    {
+      id: 3,
+      title: "Title 3",
+      body: "Body 3",
+      image: "Image 3",
+    },
+  ]);
+  
+  return (
+    <div>
+      <PostsNew/>
+      <PostsIndex posts={posts}/>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <div>
+      <p>header</p>
+      <Header/>
+
+      <p>content</p>
+      <Content/>
+
+      <p>footer</p>
+      <Footer/>
+    </div>
+  );
+}
+
+export default App;
