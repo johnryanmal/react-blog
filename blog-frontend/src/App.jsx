@@ -40,7 +40,7 @@ function PostsIndex(props) {
       {props.posts.map(recipe => (
         <div key={recipe.id}>
           <h2>{recipe.title}</h2>
-          <img src="" alt={recipe.image}></img>
+          <img src={recipe.image} alt={recipe.image}></img>
           <p>{recipe.body}</p>
         </div>
       ))}
