@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 
@@ -50,29 +50,19 @@ function PostsIndex(props) {
 }
 
 function Content() {
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: "Title 1",
-      body: "Body 1",
-      image: "Image 1",
-    },
-    {
-      id: 2,
-      title: "Title 2",
-      body: "Body 2",
-      image: "Image 2",
-    },
-    {
-      id: 3,
-      title: "Title 3",
-      body: "Body 3",
-      image: "Image 3",
-    },
-  ]);
+  const [posts, setPosts] = useState();
+
+  function handleIndexPosts() {
+    axios.get("http://localhost:3000/posts.json").then((res) => {
+      console.log(res)
+    })
+  }
+
+  // useEffect(handleIndexPosts, [])
   
   return (
     <div>
+      <button onClick={handleIndexPosts}>handleIndexPosts()</button>
       <PostsNew/>
       <PostsIndex posts={posts}/>
     </div>
