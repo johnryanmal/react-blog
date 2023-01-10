@@ -50,19 +50,20 @@ function PostsIndex(props) {
 }
 
 function Content() {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
 
   function handleIndexPosts() {
-    axios.get("http://localhost:3000/posts.json").then((res) => {
-      console.log(res)
+    axios.get("http://localhost:3000/posts.json").then((response) => {
+      let data = response.data
+      setPosts(data)
     })
   }
 
-  // useEffect(handleIndexPosts, [])
+  useEffect(handleIndexPosts, [])
   
   return (
     <div>
-      <button onClick={handleIndexPosts}>handleIndexPosts()</button>
+      {/* <button onClick={handleIndexPosts}>handleIndexPosts()</button> */}
       <PostsNew/>
       <PostsIndex posts={posts}/>
     </div>
