@@ -7,7 +7,7 @@ import { Modal } from "./Modal";
 export function Content() {
   const [posts, setPosts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalContent, setModalContent] = useState('')
+  const [modalInfo, setModalInfo] = useState('')
 
   function handleIndexPosts() {
     axios.get("http://localhost:3000/posts.json").then((response) => {
@@ -18,7 +18,7 @@ export function Content() {
 
   function handleShow(info) {
     setModalVisible(true)
-    setModalContent(info)
+    setModalInfo(info)
     console.log(info)
   }
 
@@ -34,7 +34,9 @@ export function Content() {
       <PostsNew />
       <PostsIndex posts={posts} onSelect={handleShow} />
       <Modal show={modalVisible} onClose={handleHide}>
-        <p>{modalContent}</p>
+        <h2>{modalInfo.title}</h2>
+        <p>{modalInfo.body}</p>
+        <img src={modalInfo.image} alt={modalInfo.image}></img>
       </Modal>
     </div>
   );

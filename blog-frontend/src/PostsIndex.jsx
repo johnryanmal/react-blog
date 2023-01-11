@@ -6,9 +6,8 @@ export function PostsIndex(props) {
       {props.posts.map(recipe => (
         <div key={recipe.id}>
           <h2>{recipe.title}</h2>
-          <img src={recipe.image} alt={recipe.image}></img>
-          {/* <p>{recipe.body}</p> */}
-          <div><button onClick={() => props.onSelect(recipe.body)}>Show Post</button></div>
+          <p>{recipe.body.length <= 200 ? recipe.body : recipe.body.substring(0, 200-3) + '...' }</p>
+          <div><button onClick={() => props.onSelect(recipe)}>Show Post</button></div>
         </div>
       ))}
 
