@@ -35,6 +35,10 @@ export function Content() {
       <PostsIndex posts={posts} onSelect={handleShow} />
       <Modal show={modalVisible} onClose={handleHide}>
         <h2>{modalInfo.title}</h2>
+        <small>
+          Posted at {new Date(modalInfo.created_at).toString()}<br/>
+          Updated at {new Date(modalInfo.updated_at).toString()}
+        </small>
         <p>{modalInfo.body}</p>
         <img src={modalInfo.image} alt={modalInfo.image}></img>
       </Modal>
