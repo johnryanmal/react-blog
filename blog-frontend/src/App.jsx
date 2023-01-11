@@ -2,7 +2,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Content } from "./Content";
 
-export function App() {
+export default function App() {
   return (
     <div>
       <p>header</p>
