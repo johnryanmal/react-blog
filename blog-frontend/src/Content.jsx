@@ -3,6 +3,7 @@ import axios from "axios";
 import { PostsNew } from "./PostsNew";
 import { PostsIndex } from "./PostsIndex";
 import { Modal } from "./Modal";
+import { PostShow } from "./PostShow";
 
 export function Content() {
   const [posts, setPosts] = useState([]);
@@ -34,13 +35,7 @@ export function Content() {
       <PostsNew />
       <PostsIndex posts={posts} onSelect={handleShow} />
       <Modal show={modalVisible} onClose={handleHide}>
-        <h2>{modalInfo.title}</h2>
-        <small>
-          Posted at {new Date(modalInfo.created_at).toString()}<br/>
-          Updated at {new Date(modalInfo.updated_at).toString()}
-        </small>
-        <p>{modalInfo.body}</p>
-        <img src={modalInfo.image} alt={modalInfo.image}></img>
+        <PostShow post={modalInfo}></PostShow>
       </Modal>
     </div>
   );
