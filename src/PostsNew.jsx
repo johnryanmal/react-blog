@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
 
-export function PostsNew() {
+export function PostsNew(props) {
   const [errors, setErrors] = useState([])
 
   function handleSubmit(event) {
     event.preventDefault()
-    let formData = new FormData(event.target)
-    axios.post("http://localhost:3000/posts.json")
+    let params = new FormData(event.target)
+    axios.post("http://localhost:3000/posts.json", params)
     .then((response) => {
-      console.log(response.data)
+      let post = response.data
+      console.log(post)
+      props.onPost(post)
     }).catch((error) => {
       let errors = error.response?.data?.errors ?? [error.response?.statusText]
       console.log(errors)

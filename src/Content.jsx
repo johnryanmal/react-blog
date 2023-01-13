@@ -13,11 +13,15 @@ export function Content() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalInfo, setModalInfo] = useState('')
 
-  function handleIndexPosts() {
+  function getPosts() {
     axios.get("http://localhost:3000/posts.json").then((response) => {
       let data = response.data;
       setPosts(data);
     });
+  }
+
+  function handlePost(post) {
+    setPosts([...posts, post])
   }
 
   function handleShow(info) {
@@ -30,7 +34,7 @@ export function Content() {
     setModalVisible(false)
   }
 
-  useEffect(handleIndexPosts, []);
+  useEffect(getPosts, []);
   
   return (
     <div>
@@ -38,7 +42,7 @@ export function Content() {
       <Signup/>
       <Login/>
       <LogoutLink/>
-      <PostsNew/>
+      <PostsNew onPost={handlePost}/>
       <PostsIndex posts={posts} onSelect={handleShow}/>
       <Modal show={modalVisible} onClose={handleHide}>
         <PostShow post={modalInfo}></PostShow>
