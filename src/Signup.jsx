@@ -1,12 +1,32 @@
+import axios from "axios";
+//import { useState } from "react";
+
 export function Signup() {
-  function preventDefault(event) {
+  //let errors, setErrors = useState([])
+
+  function handleSubmit(event) {
     event.preventDefault()
+    const formData = new FormData(event.target);
+    const formProps = Object.fromEntries(formData);
+    axios.post("http://localhost:3000/users.json", formProps)
+    .then((response) => {
+      console.log(response, response.data)
+    })
+    .catch((error) => {
+      console.log(error.response.data.errors)
+    })
   }
+
+  // function listener(msg) {
+  //   return () => {
+  //     console.log(msg)
+  //   }
+  // }
 
   return (
     <div>
       <p>Signup</p>
-      <form action="http://localhost:3000/users" method="post" onSubmit={preventDefault}>
+      <form onSubmit={handleSubmit}>
         <p>Name: <input type="text" name="name" /></p>
         <p>Email: <input type="text" name="email" /></p>
         <p>Password: <input type="password" name="password" /></p>
