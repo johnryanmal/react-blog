@@ -1,8 +1,12 @@
 export function Signup() {
+  function preventDefault(event) {
+    event.preventDefault()
+  }
+
   return (
     <div>
       <p>Signup</p>
-      <form>
+      <form action="http://localhost:3000/users" method="post" onSubmit={preventDefault}>
         <p>Name: <input type="text" name="name" /></p>
         <p>Email: <input type="text" name="email" /></p>
         <p>Password: <input type="password" name="password" /></p>
