@@ -1,7 +1,7 @@
 export function PostsIndex(props) {
   function truncate(string, length) {
     let ending = '...'
-    if (string <= length) {
+    if (string.length <= length) {
       return string
     } else {
       return string.substring(0, length - ending.length).trim() + ending
