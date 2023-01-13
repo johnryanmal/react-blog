@@ -5,6 +5,7 @@ import { PostsIndex } from "./PostsIndex";
 import { Modal } from "./Modal";
 import { PostShow } from "./PostShow";
 import { Signup } from "./Signup";
+import { Login } from "./Login"
 import { LogoutLink } from "./LogoutLink"
 
 export function Content() {
@@ -35,6 +36,7 @@ export function Content() {
     <div>
       {/* <button onClick={handleIndexPosts}>handleIndexPosts()</button> */}
       <Signup/>
+      <Login/>
       <LogoutLink/>
       <PostsNew/>
       <PostsIndex posts={posts} onSelect={handleShow}/>
