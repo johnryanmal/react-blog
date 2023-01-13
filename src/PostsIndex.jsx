@@ -12,14 +12,14 @@ export function PostsIndex(props) {
     <div id="posts-index" className="container">
       <h1>All posts</h1>
 
-      {props.posts.map(post => (
-        <div class="card border-dark mb-3">
-          <div class="card-body">
-            <h5 class="card-title">{post.title}</h5>
-            <p class="card-text">{truncate(post.body,200)}</p>
-            <button type="button" class="btn btn-primary" onClick={() => props.onSelect(post)}>Show Post</button>
+      {props.posts.map((post, index) => (
+        <div className="card border-dark mb-3" key={index}>
+          <div className="card-body">
+            <h5 className="card-title">{post.title}</h5>
+            <p className="card-text">{truncate(post.body,200)}</p>
+            <button type="button" className="btn btn-primary" onClick={() => props.onSelect(post)}>Show Post</button>
           </div>
-          <div class="card-footer text-muted">
+          <div className="card-footer text-muted">
             Posted at {new Date(post.created_at).toString()}
           </div>
         </div>
