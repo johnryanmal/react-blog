@@ -1,8 +1,8 @@
 import axios from "axios";
-//import { useState } from "react";
+import { useState } from "react";
 
 export function Signup() {
-  //let errors, setErrors = useState([])
+  const [errors, setErrors] = useState([])
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -13,7 +13,9 @@ export function Signup() {
       console.log(response, response.data)
     })
     .catch((error) => {
-      console.log(error.response.data.errors)
+      let errors = error.response?.data?.errors ?? []
+      console.log(errors)
+      setErrors(errors)
     })
   }
 
@@ -31,6 +33,11 @@ export function Signup() {
         <p>Email: <input type="text" name="email" /></p>
         <p>Password: <input type="password" name="password" /></p>
         <p>Password Confirmation:<input type="password" name="password_confirmation" /></p>
+        <div>
+          {errors.map((error) => (
+            <small>{error}</small>
+          ))}
+        </div>
         <button type="submit">Signup</button>
       </form>
     </div>
