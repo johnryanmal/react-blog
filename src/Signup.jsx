@@ -2,41 +2,45 @@ import axios from "axios";
 import { useState } from "react";
 
 export function Signup() {
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState([]);
 
-  function handleSubmit(event) {
-    event.preventDefault()
-    const formData = new FormData(event.target);
-    const formProps = Object.fromEntries(formData);
-    axios.post("http://localhost:3000/users.json", formProps)
-    .then((response) => {
-      console.log(response, response.data)
-    })
-    .catch((error) => {
-      let errors = error.response?.data?.errors ?? []
-      console.log(errors)
-      setErrors(errors)
-    })
-  }
-
-  // function listener(msg) {
-  //   return () => {
-  //     console.log(msg)
-  //   }
-  // }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErrors([]);
+    const params = new FormData(event.target);
+    axios
+      .post("http://localhost:3000/users.json", params)
+      .then((response) => {
+        console.log(response.data);
+        event.target.reset();
+        window.location.href = "/"; // Change this to hide a modal, redirect to a specific page, etc.
+      })
+      .catch((error) => {
+        console.log(error.response.data.errors);
+        setErrors(error.response.data.errors);
+      });
+  };
 
   return (
-    <div>
-      <p>Signup</p>
+    <div id="signup">
+      <h1>Signup</h1>
+      <ul>
+        {errors.map((error) => (
+          <li key={error}>{error}</li>
+        ))}
+      </ul>
       <form onSubmit={handleSubmit}>
-        <p>Name: <input type="text" name="name" /></p>
-        <p>Email: <input type="text" name="email" /></p>
-        <p>Password: <input type="password" name="password" /></p>
-        <p>Password Confirmation:<input type="password" name="password_confirmation" /></p>
         <div>
-          {errors.map((error) => (
-            <small>{error}</small>
-          ))}
+          Name: <input name="name" type="text" />
+        </div>
+        <div>
+          Email: <input name="email" type="email" />
+        </div>
+        <div>
+          Password: <input name="password" type="password" />
+        </div>
+        <div>
+          Password confirmation: <input name="password_confirmation" type="password" />
         </div>
         <button type="submit">Signup</button>
       </form>
