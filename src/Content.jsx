@@ -4,7 +4,8 @@ import { PostsNew } from "./PostsNew";
 import { PostsIndex } from "./PostsIndex";
 import { Modal } from "./Modal";
 import { PostShow } from "./PostShow";
-
+import { Signup } from "./Signup";
+  
 export function Content() {
   const [posts, setPosts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -32,8 +33,9 @@ export function Content() {
   return (
     <div>
       {/* <button onClick={handleIndexPosts}>handleIndexPosts()</button> */}
-      <PostsNew />
-      <PostsIndex posts={posts} onSelect={handleShow} />
+      <Signup/>
+      <PostsNew/>
+      <PostsIndex posts={posts} onSelect={handleShow}/>
       <Modal show={modalVisible} onClose={handleHide}>
         <PostShow post={modalInfo}></PostShow>
       </Modal>
