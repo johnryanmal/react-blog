@@ -5,8 +5,9 @@ export function PostsNew(props) {
   const [errors, setErrors] = useState([])
 
   function handleSubmit(event) {
-    event.preventDefault()
     let params = new FormData(event.target)
+    event.preventDefault()
+    event.target.reset()
     axios.post("http://localhost:3000/posts.json", params)
     .then((response) => {
       let post = response.data
