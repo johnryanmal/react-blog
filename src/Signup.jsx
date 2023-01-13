@@ -25,8 +25,8 @@ export function Signup() {
     <div id="signup">
       <h1>Signup</h1>
       <ul>
-        {errors.map((error) => (
-          <li key={error}>{error}</li>
+        {errors.map((error, index) => (
+          <li key={index}>{error}</li>
         ))}
       </ul>
       <form onSubmit={handleSubmit}>

@@ -32,8 +32,8 @@ export function Login() {
     <div id="login">
       <h1>Login</h1>
       <ul>
-        {errors.map((error) => (
-          <li key={error}>{error}</li>
+        {errors.map((error, index) => (
+          <li key={index}>{error}</li>
         ))}
       </ul>
       <form onSubmit={handleSubmit}>
