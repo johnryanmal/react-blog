@@ -33,6 +33,13 @@ export function Content() {
     }))
   }
 
+  function handlePostDestroy(data) {
+    console.log('destroy', data)
+    setPosts(posts.filter((post) => {
+      return post.id !== data.id
+    }))
+  }
+
   function handleShow(info) {
     setModalVisible(true)
     setModalInfo(info)
@@ -54,7 +61,7 @@ export function Content() {
       <PostsNew onPost={handlePostNew}/>
       <PostsIndex posts={posts} onSelect={handleShow}/>
       <Modal show={modalVisible} onClose={handleHide}>
-        <PostShow post={modalInfo} onPost={handlePostUpdate}></PostShow>
+        <PostShow post={modalInfo} onUpdate={handlePostUpdate} onDestroy={handlePostDestroy}></PostShow>
       </Modal>
     </div>
   );
