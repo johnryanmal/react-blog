@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 export function PostShow(props) {
-  const post = props.post;
+  const [post, setPost] = useState(props.post);
   const [errors, setErrors] = useState([])
 
   function handleSubmit(event) {
@@ -12,9 +12,10 @@ export function PostShow(props) {
     console.log('params', Object.fromEntries(params))
     axios.patch(`http://localhost:3000/posts/${post.id}.json`, params)
     .then((response) => {
-      let post = response.data
-      console.log(post)
-      //props.onPost(post)
+      let data = response.data
+      console.log(data)
+      setPost(data)
+      props.onPost(data)
     }).catch((error) => {
       let errors = error.response?.data?.errors ?? [error.response?.statusText]
       console.log(errors)

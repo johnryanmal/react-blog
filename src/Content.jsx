@@ -20,8 +20,17 @@ export function Content() {
     });
   }
 
-  function handlePost(post) {
+  function handlePostNew(post) {
     setPosts([...posts, post])
+  }
+
+  function handlePostUpdate(data) {
+    setPosts(posts.map((post) => {
+      if (post.id === data.id) {
+        return data
+      }
+      return post
+    }))
   }
 
   function handleShow(info) {
@@ -42,10 +51,10 @@ export function Content() {
       <Signup/>
       <Login/>
       <LogoutLink/>
-      <PostsNew onPost={handlePost}/>
+      <PostsNew onPost={handlePostNew}/>
       <PostsIndex posts={posts} onSelect={handleShow}/>
       <Modal show={modalVisible} onClose={handleHide}>
-        <PostShow post={modalInfo}></PostShow>
+        <PostShow post={modalInfo} onPost={handlePostUpdate}></PostShow>
       </Modal>
     </div>
   );
