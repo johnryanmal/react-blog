@@ -36,7 +36,11 @@ export function Content() {
   function handlePostDestroy(data) {
     console.log('destroy', data)
     setPosts(posts.filter((post) => {
-      return post.id !== data.id
+      if (post.id === data.id) {
+        handleHide()
+        return false
+      }
+      return true
     }))
   }
 
